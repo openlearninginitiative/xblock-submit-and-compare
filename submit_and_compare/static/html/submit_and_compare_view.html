@@ -1,0 +1,23 @@
+<div id="submit_and_compare">
+	<div id="question_prompt">{prompt}</div>
+	<div id="student_answer">
+		<div id="your_answer" style="display:none">Your Answer:</div>
+		<textarea class="answer" id="answer_box">{student_answer}</textarea>
+	</div>
+	<div class="button_holder">
+		<input 
+		id="submit_button" 
+		class="submit" 
+		type="button" 
+		value="Submit and Compare"></input>
+		<input 
+		id="reset_button" 
+		class="reset" 
+		type="button" 
+		value="Reset"></input>
+	</div>
+	<div id="expert_answer" style="display:none">
+		<div id="our_answer">Our Answer:</div>
+		<div id="explanation">{explanation}</div>
+	</div>
+</div>
