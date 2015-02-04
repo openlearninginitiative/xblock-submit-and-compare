@@ -2,7 +2,7 @@ Submit and Compare XBlock
 =========================
 This XBlock provides a way to do an ungraded self assessment activity.  It is useful for synthesis questions, or questions which require the student to answer in her own words.  After the student submits her answer, she is able to see the instructor's answer, and compare her answer to the expert answer.
 
-![Completed Question](docs/img/completed.png)
+![Completed Question](docs/img/submitted.png)
 
 Installation
 ------------
@@ -41,7 +41,7 @@ The question and expert answer can both be customized by clicking the `Edit` but
 
 The Submit and Compare XBlock uses a simple XML-based structure as shown below:
 ```bash
-<submit_and_compare>
+<submit_and_compare schema_version='1'>
 	<body>Insert the question here.  You can include html tags like <p>, <img>, etc.</body>
 	<explanation>Insert the expert answer here.  You can include html tags like <p>, <img>, etc.</explanation>
 	<demandhint>
