@@ -1,8 +1,12 @@
 Changelog
 =========
-Version 0.1		Initial release
+Version 0.1		
 
-Version 0.2		Added Hint functionality
+				Initial release
+
+Version 0.2		
+
+				Added Hint functionality
 
 				Improved XML parsing
 				
