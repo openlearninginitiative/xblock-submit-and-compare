@@ -11,6 +11,8 @@ function SubmitAndCompareXBlockInitEdit(runtime, element) {
     $(element).find('.action-save').bind('click', function() {
         var data = {
             'display_name': $('#submit_and_compare_edit_display_name').val(),
+            'your_answer_label': $('#submit_and_compare_edit_your_answer_label').val(),
+            'our_answer_label': $('#submit_and_compare_edit_our_answer_label').val(),
             'data': xmlEditor.getValue(),
         };
         

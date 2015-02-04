@@ -16,7 +16,7 @@ def package_data(pkg, root):
 
 setup(
     name='xblock-submit-and-compare',
-    version='0.1',
+    version='0.2',
     description='Submit and Compare XBlock for self assessment',
     packages=[
         'submit_and_compare',

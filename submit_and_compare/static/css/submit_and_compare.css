@@ -1,15 +1,15 @@
-#question_prompt {
+.submit_and_compare .question_prompt {
   text-align: left;
 }
 
-#student_answer {
+.submit_and_compare .student_answer {
   padding-top: 20px;
   padding-bottom: 20px;
-  color: blue;
+  color: #3399cc;
   font-weight: 600;
 }
 
-textarea#answer_box {
+.submit_and_compare .answer {
 	width: 100%;
 	max-width: 100%;
 	height: 120px;
@@ -17,20 +17,35 @@ textarea#answer_box {
 	padding: 5px;
 }
 
-#our_answer {
+.submit_and_compare .expert_answer {
   text-align: left;
-  padding-top: 20px;
-  color: green;
+  padding-bottom: 20px;
+}
+
+.submit_and_compare .our_answer {
+  text-align: left;
+  color: #009900;
   font-weight: 600;
 }
 
-#submit_button {
+.submit_and_compare .hint {
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+.submit_and_compare .reset_button {
 	height: 40px;
 	vertical-align: middle;
 	font-weight: 600;
 }
 
-#reset_button {
+.submit_and_compare .hint_button {
+	height: 40px;
+	vertical-align: middle;
+	font-weight: 600;
+}
+
+.submit_and_compare .submit_button {
 	height: 40px;
 	vertical-align: middle;
 	font-weight: 600;

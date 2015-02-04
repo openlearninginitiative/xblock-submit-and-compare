@@ -1,23 +1,33 @@
-<div id="submit_and_compare">
-	<div id="question_prompt">{prompt}</div>
-	<div id="student_answer">
-		<div id="your_answer" style="display:none">Your Answer:</div>
-		<textarea class="answer" id="answer_box">{student_answer}</textarea>
+<div class='submit_and_compare'>
+	<h2>{display_name}</h2>
+	<div class='question_prompt'>{prompt}</div>
+	<div class='student_answer'>
+		<div class='your_answer' style='display:none'>{your_answer_label}</div>
+		<textarea class='answer'>{student_answer}</textarea>
 	</div>
-	<div class="button_holder">
-		<input 
-		id="submit_button" 
-		class="submit" 
-		type="button" 
-		value="Submit and Compare"></input>
-		<input 
-		id="reset_button" 
-		class="reset" 
-		type="button" 
-		value="Reset"></input>
+	<div class='expert_answer' style='display:none'>
+		<div class='our_answer'>{our_answer_label}</div>
+		<div class='explanation'>{explanation}</div>
 	</div>
-	<div id="expert_answer" style="display:none">
-		<div id="our_answer">Our Answer:</div>
-		<div id="explanation">{explanation}</div>
+	<div class='hint' style='display:none'>{{hint}}</div>
+	<div class='button_holder'>
+		<div style='display:inline'>
+			<input 
+			class='submit_button' 
+			type='button' 
+			value='Submit and Compare'></input>
+		</div>
+		<div class='hint_button_holder' style='display:none'>
+			<input 
+			class='hint_button' 
+			type='button' 
+			value='Hint'></input>
+		</div>
+		<div style='display:inline'>
+			<input 
+			class='reset_button' 
+			type='button' 
+			value='Reset'></input>
+		</div>
 	</div>
 </div>
