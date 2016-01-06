@@ -47,6 +47,12 @@ class SubmitAndCompareXBlock(XBlock):
         help='Label for the \'expert\' answer',
     )
     
+    submit_button_label = String(
+        default='Submit and Compare', 
+        scope=Scope.settings,
+        help='Label for the submit button',
+    )
+    
     hints = List(
         default=[],
         scope=Scope.content,
@@ -92,6 +98,7 @@ class SubmitAndCompareXBlock(XBlock):
                                     explanation = explanation, 
                                     your_answer_label = self.your_answer_label,
                                     our_answer_label = self.our_answer_label,
+                                    submit_button_label = self.submit_button_label,
                                     attributes = attributes
                                     ))
         frag.add_css(self.resource_string('static/css/submit_and_compare.css'))
@@ -109,6 +116,7 @@ class SubmitAndCompareXBlock(XBlock):
             'xml_data': self.question_string,
             'your_answer_label': self.your_answer_label,
             'our_answer_label': self.our_answer_label,
+            'submit_button_label': self.submit_button_label,
         }
         html = self.render_template('static/html/submit_and_compare_edit.html', context)
         
@@ -133,6 +141,7 @@ class SubmitAndCompareXBlock(XBlock):
         self.display_name = submissions['display_name']
         self.your_answer_label = submissions['your_answer_label']
         self.our_answer_label = submissions['our_answer_label']
+        self.submit_button_label = submissions['submit_button_label']
         xml_content = submissions['data']
 
         try:

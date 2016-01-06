@@ -13,7 +13,8 @@ function SubmitAndCompareXBlockInitEdit(runtime, element) {
             'display_name': $('#submit_and_compare_edit_display_name').val(),
             'your_answer_label': $('#submit_and_compare_edit_your_answer_label').val(),
             'our_answer_label': $('#submit_and_compare_edit_our_answer_label').val(),
-            'data': xmlEditor.getValue(),
+            'submit_button_label': $('#submit_and_compare_edit_submit_button_label').val(),
+            'data': xmlEditor.getValue()
         };
         
         runtime.notify('save', {state: 'start'});
