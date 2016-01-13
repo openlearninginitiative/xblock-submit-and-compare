@@ -129,7 +129,8 @@ class SubmitAndCompareXBlock(XBlock):
         Save student answer
         '''
         self.student_answer = submissions['answer']
-        return {'success': True}
+        return {'success': True,
+                'answer': self.student_answer}
 
     @XBlock.json_handler
     def studio_submit(self, submissions, suffix=''):
@@ -177,7 +178,7 @@ class SubmitAndCompareXBlock(XBlock):
 
         return {
             'result': 'success',
-            'hints': hints,
+            'hints': hints
         }
 
     @XBlock.json_handler
