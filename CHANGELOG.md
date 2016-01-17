@@ -24,4 +24,6 @@ Version 0.4
 
 				Added option to specify label on submit and compare button
 				
-				
+Version 0.5
+
+				Added grading to the xblock

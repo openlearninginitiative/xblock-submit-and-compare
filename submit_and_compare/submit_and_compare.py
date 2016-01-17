@@ -2,9 +2,10 @@
 
 import pkg_resources
 from django.template import Context, Template
+from django.utils.translation import ungettext
 
 from xblock.core import XBlock
-from xblock.fields import Scope, String, List
+from xblock.fields import Scope, String, List, Float, Integer
 from xblock.fragment import Fragment
 
 from lxml import etree
@@ -78,6 +79,21 @@ class SubmitAndCompareXBlock(XBlock):
             </submit_and_compare>
         '''))
 
+    score = Float(
+        default=0.0,
+        scope=Scope.user_state,
+    )
+
+    weight = Integer(
+        display_name='Weight',
+        help='This assigns an integer value representing '
+             'the weight of this problem',
+        default=1,
+        scope=Scope.settings,
+    )
+
+    has_score = True
+
     '''
     Main functions
     '''
@@ -86,12 +102,14 @@ class SubmitAndCompareXBlock(XBlock):
         The primary view of the XBlock, shown to students
         when viewing courses.
         '''
+        problem_progress = self._get_problem_progress()
         prompt = self._get_body(self.question_string)
         explanation = self._get_explanation(self.question_string)
 
         attributes = ''
         html = self.resource_string('static/html/submit_and_compare_view.html')
         frag = Fragment(html.format(display_name=self.display_name,
+                                    problem_progress=problem_progress,
                                     prompt=prompt,
                                     student_answer=self.student_answer,
                                     explanation=explanation,
@@ -111,6 +129,7 @@ class SubmitAndCompareXBlock(XBlock):
         '''
         context = {
             'display_name': self.display_name,
+            'weight': self.weight,
             'xml_data': self.question_string,
             'your_answer_label': self.your_answer_label,
             'our_answer_label': self.our_answer_label,
@@ -129,7 +148,18 @@ class SubmitAndCompareXBlock(XBlock):
         Save student answer
         '''
         self.student_answer = submissions['answer']
-        return {'success': True}
+
+        if self.student_answer:
+            self.score = self.weight
+        else:
+            self.score = 0.0
+
+        self._publish_grade()
+        result = {
+            'success': True,
+            'problem_progress': self._get_problem_progress(),
+        }
+        return result
 
     @XBlock.json_handler
     def studio_submit(self, submissions, suffix=''):
@@ -137,6 +167,12 @@ class SubmitAndCompareXBlock(XBlock):
         Save studio edits
         '''
         self.display_name = submissions['display_name']
+        try:
+            weight = int(submissions['weight'])
+        except ValueError:
+            weight = 0
+        if weight > 0:
+            self.weight = weight
         self.your_answer_label = submissions['your_answer_label']
         self.our_answer_label = submissions['our_answer_label']
         self.submit_button_label = submissions['submit_button_label']
@@ -240,3 +276,38 @@ class SubmitAndCompareXBlock(XBlock):
             # workaround for xblock workbench
             unique_id = 'workbench-workaround-id'
         return unique_id
+
+    def _get_problem_progress(self):
+        """
+        Returns a statement of progress for the XBlock, which depends
+        on the user's current score
+        """
+        result = ''
+        if self.score == 0.0:
+            result = ungettext(
+                '{weight} point possible',
+                '{weight} points possible',
+                self.weight,
+            ).format(
+                weight=self.weight
+            )
+        else:
+            score_string = '{0:g}'.format(self.score)
+            result = ungettext(
+                score_string + '/' + "{weight} point",
+                score_string + '/' + "{weight} points",
+                self.weight,
+            ).format(
+                weight=self.weight
+            )
+        return result
+
+    def _publish_grade(self):
+        self.runtime.publish(
+            self,
+            'grade',
+            {
+                'value': self.score,
+                'max_value': self.weight,
+            }
+        )
