@@ -11,6 +11,7 @@ function SubmitAndCompareXBlockInitView(runtime, element) {
     var hint_button = $element.find('hint_button');
     var reset_button = $element.find('.reset_button');
 
+    var problem_progress = $element.find('.problem_progress');
     var question_prompt = $element.find('.question_prompt');
     var answer_textarea = $element.find('.answer');
     var your_answer = $element.find('.your_answer');
@@ -43,8 +44,13 @@ function SubmitAndCompareXBlockInitView(runtime, element) {
       });
     }
 
+    function pre_submit() {
+        problem_progress.text('(Loading...)')
+    }
+
 	function post_submit(result) {
         $('body').data(cached_answer_id, $('.answer',element).val());
+        problem_progress.text('(' + result.problem_progress + ')')
 	}
 	
 	function set_hints(result) {
@@ -89,6 +95,7 @@ function SubmitAndCompareXBlockInitView(runtime, element) {
     }
 
     $('.submit_button', element).click(function(eventObject) {
+        pre_submit();
         $.ajax({
             type: 'POST',
             url: handlerUrl,
