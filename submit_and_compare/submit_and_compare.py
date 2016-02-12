@@ -157,6 +157,7 @@ class SubmitAndCompareXBlock(XBlock):
         self._publish_grade()
         result = {
             'success': True,
+            'answer': self.student_answer,
             'problem_progress': self._get_problem_progress(),
         }
         return result
@@ -213,7 +214,7 @@ class SubmitAndCompareXBlock(XBlock):
 
         return {
             'result': 'success',
-            'hints': hints,
+            'hints': hints
         }
 
     @XBlock.json_handler

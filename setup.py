@@ -27,7 +27,11 @@ setup(
     entry_points={
         'xblock.v1': [
             'submit-and-compare = submit_and_compare:SubmitAndCompareXBlock',
+        ],
+        'xblock.test.v0': [
+            'test-submit-and-compare = submit_and_compare_tests:TestSubmitAndCompare',
         ]
+
     },
     package_data=package_data("submit_and_compare", "static"),
 )
