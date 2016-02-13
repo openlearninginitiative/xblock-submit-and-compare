@@ -25,8 +25,10 @@ function SubmitAndCompareXBlockInitView(runtime, element) {
     var hint_counter = 0;
 	
     var cached_answer_id = question_prompt.parent().parent().attr('data-usage-id') + '_cached_answer';
+    var problem_progress_id = question_prompt.parent().parent().attr('data-usage-id') + '_problem_progress';
     if ($('body').data(cached_answer_id) !== undefined) {
         answer_textarea.text($('body').data(cached_answer_id));
+        problem_progress.text('(' + $('body').data(problem_progress_id) + ')')
     }
 
     $.ajax({
@@ -50,6 +52,7 @@ function SubmitAndCompareXBlockInitView(runtime, element) {
 
 	function post_submit(result) {
         $('body').data(cached_answer_id, $('.answer',element).val());
+        $('body').data(problem_progress_id, result.problem_progress);
         problem_progress.text('(' + result.problem_progress + ')')
 	}
 	
